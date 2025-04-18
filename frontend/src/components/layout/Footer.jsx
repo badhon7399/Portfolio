@@ -4,9 +4,8 @@ import {
   Stack,
   Typography,
   IconButton,
-  Grid,
+  Link as MuiLink,
 } from "@mui/material";
-import { motion } from "framer-motion";
 import {
   FaGithub,
   FaLinkedin,
@@ -14,6 +13,7 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const socialLinks = [
   {
@@ -38,16 +38,10 @@ const socialLinks = [
   },
 ];
 
-const contactInfo = [
-  {
-    icon: <FaMapMarkerAlt size={16} />,
-    text: "Dhaka, Bangladesh",
-  },
-  {
-    icon: <FaEnvelope size={16} />,
-    text: "yasinbadhon@gmail.com",
-    url: "mailto:yasinbadhon@gmail.com",
-  },
+const quickLinks = [
+  { name: "Home", path: "/" },
+  { name: "Projects", path: "/projects" },
+  { name: "Contact", path: "/contact" },
 ];
 
 const Footer = () => {
@@ -70,150 +64,246 @@ const Footer = () => {
         },
       }}
     >
-      <Container maxWidth="lg">
-        <Box sx={{ py: 4 }}>
-          <Grid container spacing={4} justifyContent="center">
-            <Grid item xs={12} md={4}>
-              <Stack
-                component={motion.div}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                spacing={2}
-                alignItems={{ xs: "center", md: "flex-start" }}
+      <Container maxWidth={false}>
+        <Box py={{ xs: 4, md: 4 }}>
+          <Stack
+            direction={{ xs: "column", md: "row" }}
+            justifyContent="space-between"
+            alignItems={{ xs: "center", md: "center" }}
+            spacing={{ xs: 4, md: 2 }}
+            mb={3}
+          >
+            {/* Brand and Description */}
+            <Box
+              sx={{
+                maxWidth: { xs: "100%", md: "400px" },
+                textAlign: { xs: "center", md: "left" },
+                width: { xs: "100%", md: "auto" },
+                px: { xs: 2, md: 0 },
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{
+                  color: "primary.main",
+                  fontFamily: '"Montserrat", sans-serif',
+                  mb: { xs: 1.5, md: 1 },
+                  fontSize: { xs: "1.25rem", md: "1.25rem" },
+                }}
               >
-                <Typography
-                  variant="h6"
-                  sx={{
-                    color: "primary.main",
-                    fontFamily: '"Fira Code", monospace',
-                    fontSize: "1rem",
-                    letterSpacing: "0.1em",
-                    mb: 1,
-                  }}
-                >
-                  Contact
-                </Typography>
-                {contactInfo.map((info, index) => (
-                  <Box
-                    key={index}
-                    component={motion.div}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 * index }}
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 1,
+                Yasin Badhon
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: "text.secondary",
+                  lineHeight: 1.6,
+                  fontSize: { xs: "0.875rem", md: "0.875rem" },
+                  opacity: 0.9,
+                }}
+              >
+                Full Stack Developer specializing in MERN stack development.
+                Creating innovative web solutions with a focus on user
+                experience and performance.
+              </Typography>
+            </Box>
+
+            {/* Quick Links */}
+            <Stack
+              spacing={2}
+              alignItems={{ xs: "center", md: "flex-start" }}
+              sx={{
+                width: { xs: "100%", md: "auto" },
+                px: { xs: 2, md: 0 },
+              }}
+            >
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  color: "primary.main",
+                  fontFamily: '"Montserrat", sans-serif',
+                  fontSize: { xs: "1rem", md: "1rem" },
+                  fontWeight: 600,
+                }}
+              >
+                Quick Links
+              </Typography>
+              <Stack
+                spacing={1.5}
+                alignItems="center"
+                sx={{
+                  width: "100%",
+                }}
+              >
+                {quickLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    style={{
+                      textDecoration: "none",
+                      width: "100%",
                     }}
                   >
-                    <Box
+                    <Typography
+                      variant="body2"
                       sx={{
-                        color: "primary.main",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      {info.icon}
-                    </Box>
-                    {info.url ? (
-                      <Typography
-                        component="a"
-                        href={info.url}
-                        variant="body2"
-                        sx={{
-                          color: "secondary.light",
-                          textDecoration: "none",
-                          transition: "color 0.3s ease",
-                          "&:hover": {
-                            color: "primary.main",
-                          },
-                        }}
-                      >
-                        {info.text}
-                      </Typography>
-                    ) : (
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          color: "secondary.light",
-                        }}
-                      >
-                        {info.text}
-                      </Typography>
-                    )}
-                  </Box>
-                ))}
-              </Stack>
-            </Grid>
-
-            <Grid item xs={12} md={4}>
-              <Stack
-                alignItems="center"
-                spacing={3}
-                component={motion.div}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <Stack direction="row" spacing={3}>
-                  {socialLinks.map((link) => (
-                    <IconButton
-                      key={link.name}
-                      component="a"
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{
-                        color: "primary.main",
-                        transition: "all 0.3s ease",
+                        color: "text.secondary",
+                        transition: "color 0.2s ease",
+                        textAlign: "center",
+                        fontSize: { xs: "0.875rem", md: "0.875rem" },
                         "&:hover": {
-                          color: "primary.light",
-                          transform: "translateY(-3px)",
-                          backgroundColor: "rgba(100, 255, 218, 0.1)",
+                          color: "primary.main",
                         },
                       }}
                     >
-                      {link.icon}
-                    </IconButton>
-                  ))}
-                </Stack>
-
-                <Typography
-                  variant="body2"
-                  component={motion.p}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  sx={{
-                    color: "secondary.light",
-                    textAlign: "center",
-                    fontFamily: '"Fira Code", monospace',
-                    fontSize: "0.9rem",
-                    letterSpacing: "0.05em",
-                  }}
-                >
-                  Designed & Built by Yasin Badhon
-                </Typography>
-
-                <Typography
-                  variant="caption"
-                  component={motion.p}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  sx={{
-                    color: "secondary.main",
-                    opacity: 0.8,
-                    fontFamily: '"Fira Code", monospace',
-                    fontSize: "0.8rem",
-                  }}
-                >
-                  © {new Date().getFullYear()} All rights reserved
-                </Typography>
+                      {link.name}
+                    </Typography>
+                  </Link>
+                ))}
               </Stack>
-            </Grid>
-          </Grid>
+            </Stack>
+
+            {/* Contact Info */}
+            <Stack
+              spacing={2}
+              alignItems={{ xs: "center", md: "flex-start" }}
+              sx={{
+                width: { xs: "100%", md: "auto" },
+                px: { xs: 2, md: 0 },
+              }}
+            >
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  color: "primary.main",
+                  fontFamily: '"Montserrat", sans-serif',
+                  fontSize: { xs: "1rem", md: "1rem" },
+                  fontWeight: 600,
+                }}
+              >
+                Contact
+              </Typography>
+              <Stack
+                spacing={1.5}
+                alignItems="center"
+                sx={{
+                  width: "100%",
+                }}
+              >
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  alignItems="center"
+                  justifyContent="center"
+                  sx={{
+                    color: "text.secondary",
+                    transition: "color 0.2s ease",
+                    width: "100%",
+                    "&:hover": {
+                      color: "primary.main",
+                    },
+                  }}
+                >
+                  <FaEnvelope size={14} />
+                  <MuiLink
+                    href="mailto:yasinbadhon@gmail.com"
+                    sx={{
+                      color: "inherit",
+                      textDecoration: "none",
+                      fontSize: { xs: "0.875rem", md: "0.875rem" },
+                    }}
+                  >
+                    yasinbadhon@gmail.com
+                  </MuiLink>
+                </Stack>
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  alignItems="center"
+                  justifyContent="center"
+                  sx={{
+                    color: "text.secondary",
+                    width: "100%",
+                  }}
+                >
+                  <FaMapMarkerAlt size={14} />
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontSize: { xs: "0.875rem", md: "0.875rem" },
+                    }}
+                  >
+                    Dhaka, Bangladesh
+                  </Typography>
+                </Stack>
+              </Stack>
+            </Stack>
+          </Stack>
+
+          {/* Divider */}
+          <Box
+            sx={{
+              height: "1px",
+              background:
+                "linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.1), transparent)",
+              my: { xs: 3, md: 3 },
+            }}
+          />
+
+          {/* Bottom Section */}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={{ xs: 2.5, sm: 2 }}
+            sx={{
+              width: "100%",
+              px: { xs: 2, md: 0 },
+            }}
+          >
+            <Typography
+              variant="body2"
+              sx={{
+                color: "text.secondary",
+                textAlign: "center",
+                width: "100%",
+                fontSize: { xs: "0.8rem", md: "0.875rem" },
+                opacity: 0.9,
+              }}
+            >
+              © {new Date().getFullYear()} Yasin Badhon. All rights reserved.
+            </Typography>
+
+            <Stack
+              direction="row"
+              spacing={2.5}
+              justifyContent="center"
+              sx={{
+                width: "100%",
+              }}
+            >
+              {socialLinks.map((link) => (
+                <IconButton
+                  key={link.name}
+                  component="a"
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    color: "primary.main",
+                    transition: "all 0.2s ease",
+                    padding: "6px",
+                    "&:hover": {
+                      color: "primary.light",
+                      transform: "translateY(-2px)",
+                    },
+                  }}
+                >
+                  {link.icon}
+                </IconButton>
+              ))}
+            </Stack>
+          </Stack>
         </Box>
       </Container>
     </Box>

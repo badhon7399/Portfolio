@@ -72,19 +72,19 @@ const Home = () => {
   }, []);
 
   return (
-    <Box>
+    <Box sx={{ overflow: "hidden" }}>
       {/* Hero Section with parallax effect */}
       <Box
         sx={{
-          minHeight: "100vh",
+          minHeight: "calc(100vh - 64px)", // Subtract header height
           display: "flex",
           alignItems: "center",
           position: "relative",
-          overflow: "hidden",
+          py: { xs: 4, md: 0 }, // Add padding on mobile
         }}
       >
         <Motion.div style={{ opacity, y }} className="parallax-content">
-          <Container maxWidth="lg">
+          <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
             <Grid container spacing={4} alignItems="center">
               <Grid item xs={12} md={6}>
                 <Motion.div
@@ -92,13 +92,13 @@ const Home = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
                 >
-                  <Box sx={{ mb: 2 }}>
+                  <Box sx={{ mb: { xs: 3, md: 4 } }}>
                     <Typography
                       variant="subtitle1"
                       sx={{
                         color: "primary.main",
-                        mb: 1,
-                        fontSize: "1.1rem",
+                        mb: 2,
+                        fontSize: { xs: "1rem", md: "1.1rem" },
                       }}
                     >
                       Welcome to my portfolio
@@ -107,17 +107,18 @@ const Home = () => {
                       variant="h1"
                       sx={{
                         color: "primary.main",
-                        fontSize: { xs: "2.5rem", md: "4rem" },
+                        fontSize: { xs: "2.5rem", sm: "3rem", md: "4rem" },
                         display: "block",
-                        mb: 1,
+                        mb: { xs: 2, md: 3 },
                         fontFamily: '"Playfair Display", serif',
                         textShadow: "0 2px 4px rgba(100, 255, 218, 0.1)",
+                        lineHeight: 1.2,
                       }}
                     >
                       Hi, I'm Yasin Badhon
                     </Typography>
                   </Box>
-                  <Box sx={{ mb: 3, minHeight: "3.5rem" }}>
+                  <Box sx={{ mb: { xs: 3, md: 4 }, minHeight: "3.5rem" }}>
                     <Typography
                       variant="h2"
                       sx={{
@@ -142,9 +143,9 @@ const Home = () => {
                     variant="body1"
                     sx={{
                       color: "secondary.light",
-                      mb: 4,
+                      mb: { xs: 4, md: 5 },
                       maxWidth: "600px",
-                      fontSize: "1.2rem",
+                      fontSize: { xs: "1.1rem", md: "1.2rem" },
                       lineHeight: 1.8,
                       letterSpacing: "0.01em",
                     }}
@@ -153,7 +154,7 @@ const Home = () => {
                     clean code, modern design, and user experience, I create
                     websites and applications that make an impact.
                   </Typography>
-                  <Box sx={{ display: "flex", gap: 2 }}>
+                  <Box sx={{ display: "flex", gap: { xs: 2, md: 3 } }}>
                     <Button
                       component={Link}
                       to="/projects"
@@ -198,7 +199,11 @@ const Home = () => {
       {/* Featured Projects Section */}
       <Box
         ref={projectsRef}
-        sx={{ py: 8, backgroundColor: "background.paper" }}
+        sx={{
+          py: { xs: 6, md: 10 },
+          px: { xs: 2, sm: 3, md: 4 },
+          backgroundColor: "background.paper",
+        }}
       >
         <Container maxWidth="lg">
           <Motion.div
@@ -210,9 +215,10 @@ const Home = () => {
               variant="h2"
               sx={{
                 color: "primary.main",
-                mb: 6,
+                mb: { xs: 4, md: 6 },
                 textAlign: "center",
                 fontFamily: '"Montserrat", sans-serif',
+                fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
                 position: "relative",
                 "&::after": {
                   content: '""',
@@ -220,7 +226,7 @@ const Home = () => {
                   bottom: "-16px",
                   left: "50%",
                   transform: "translateX(-50%)",
-                  width: "80px",
+                  width: { xs: "60px", md: "80px" },
                   height: "4px",
                   background:
                     "linear-gradient(90deg, transparent, #64ffda, transparent)",
@@ -229,7 +235,7 @@ const Home = () => {
             >
               Featured Projects
             </Typography>
-            <Grid container spacing={4}>
+            <Grid container spacing={{ xs: 3, md: 4 }}>
               {featuredProjects.map((project) => (
                 <Grid item xs={12} md={4} key={project._id}>
                   <Motion.div
@@ -241,7 +247,7 @@ const Home = () => {
                   >
                     <Paper
                       sx={{
-                        p: 3,
+                        p: { xs: 2.5, md: 3 },
                         height: "100%",
                         backgroundColor: "background.default",
                         transition: "all 0.3s ease",
@@ -295,7 +301,8 @@ const Home = () => {
       <Box
         ref={aboutRef}
         sx={{
-          py: 12,
+          py: { xs: 8, md: 12 },
+          px: { xs: 2, sm: 3, md: 4 },
           position: "relative",
           "&::before": {
             content: '""',
@@ -320,7 +327,7 @@ const Home = () => {
         }}
       >
         <Container maxWidth="lg">
-          <Grid container spacing={6} alignItems="center">
+          <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
             <Grid item xs={12} md={6}>
               <Motion.div
                 initial="hidden"
@@ -328,7 +335,7 @@ const Home = () => {
                 variants={containerVariants}
               >
                 <Motion.div variants={itemVariants}>
-                  <Box sx={{ position: "relative", mb: 4 }}>
+                  <Box sx={{ position: "relative", mb: { xs: 3, md: 4 } }}>
                     <Typography
                       variant="h2"
                       sx={{
@@ -336,9 +343,9 @@ const Home = () => {
                         position: "relative",
                         display: "inline-block",
                         fontFamily: '"Montserrat", sans-serif',
-                        fontSize: { xs: "2.5rem", md: "3.5rem" },
+                        fontSize: { xs: "2rem", sm: "2.5rem", md: "3.5rem" },
                         fontWeight: 600,
-                        mb: 2,
+                        mb: { xs: 2, md: 3 },
                         "&::after": {
                           content: '""',
                           position: "absolute",
