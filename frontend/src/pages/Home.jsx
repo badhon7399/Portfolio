@@ -101,7 +101,7 @@ const Home = () => {
                         fontSize: { xs: "1rem", md: "1.1rem" },
                       }}
                     >
-                      Welcome to my portfolio
+                      Welcome to my portfoliojkj
                     </Typography>
                     <Typography
                       variant="h1"
